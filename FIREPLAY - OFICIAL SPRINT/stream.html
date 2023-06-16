@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-br" >
+<head>
+  <meta charset="UTF-8">
+  <title>FireStream</title>
+  <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/ydGC80F/Microsoft-Teams-image-15.png">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css'><link rel="stylesheet" href="stream.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="container">
+	<div class="navbar">
+		<div class="navbar__container">
+			<div class="navbar__logo">
+				<img
+              src="https://i.ibb.co/1rJ5SyP/5-removebg-preview.png"
+              width="60"
+              height="60"
+              alt="Inc Logo"
+            />
+			</div>
+			<a href=""> <div class="navbar__item" >Seguindo</div></a>
+			<div class="navbar__item">Navegar</div>
+			<a href="index.html"><div class="navbar__item text__desktop">FirePlay</div></a>
+			<a href="comunidade.html"><div class="navbar__item text__prime">FirePlay Community</div></a>
+			<div class="navbar__icon">
+				<i class="fas fa-ellipsis-h"></i>
+			</div>
+			<div class="navbar__search">
+				<i class="fas fa-search navbar__search-icon"></i>
+				<input type="text" class="navbar__searchbar" placeholder="Search">
+			</div>
+			<div class="navbar__left">
+
+			</div>
+			<div class="navbar__icon navbar__icon--crown">
+				<div class="counter">
+					3
+				</div>
+				<i class="fas fa-crown"></i>
+			</div>
+			<div class="navbar__icon">
+				<i class="fas fa-bell"></i>
+				<div class="counter">
+					2
+				</div>
+			</div>
+			<div class="navbar__bits">
+				<div class="dropdown">
+					<i class="fas fa-gem"></i>
+					<span class="navbar__bits-text">
+					Compre   Fire
+				</span>
+					<i class="fas fa-caret-down"></i>
+				</div>
+			</div>
+			<div class="navbar__profile">
+				<img src="https://cdn-icons-png.flaticon.com/512/4519/4519678.png" alt="" class="navbar__profile-image">
+				<div class="navbar__profile-status"></div>
+				<div class="navbar__profile-text">
+					<span class="navbar__profile-text--user">
+					Faça o login
+				</span>
+					<span class="navbar__profile-text--description">
+					Para acessar sua conta
+				</span>
+				</div>
+				<i class="fas fa-caret-down"></i>
+			</div>
+		</div>
+	</div>
+
+	<div class="content">
+		
+		<div class="sidebar">
+			<div class="sidebar__title">
+				<span class="sidebar__title-text">
+				Principais Streamers
+			</span>
+				<span class="sidebar__title-icon">
+				<i class="fas fa-heart"></i>
+			</span>
+			</div>
+			<hr class="sidebar__hr">
+			<div class="sidebar__users">
+				<div v-for="user in users" :id="user.id" class="sidebar__user">
+					<div class="sidebar__user-image">
+						<img :src="user.imageLink" alt="">
+					</div>
+					<div class="sidebar__user-text">
+						<div class="sidebar__user-username">
+							{{user.username}}
+						</div>
+						<div class="sidebar__user-playing">
+							{{user.playingDisplay}}
+						</div>
+						<div class="sidebar__user-viewers">
+							<div class="record-button"></div>
+							{{user.viewers}}
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="sidebar__search">
+			<div class="sidebar__search-bar">
+				<div class="sidebar__search-icon">
+					<i class="fas fa-search"></i>
+				</div>
+				<input class="sidebar__search-input" type="text" placeholder="Search to Add Friends">
+			</div>
+		</div>
+		</div>
+		
+					
+		<div class="prime-banner">	
+			<a href="#" class="prime-banner__prime">
+				<i class="fas fa-crown"></i>
+				FireStream Plus
+			</a>
+			<div class="prime-banner__text">
+				Milhares de games e beneficios todo mês, somente assinando o combo FirePlay. Teste gratis por 30 dias e cancele quando quiser
+			</div>
+			<a href="#" class="prime-banner__trial">
+				30 dias gratis
+			</a>
+		</div>
+
+		<div class="main-content">
+			
+			<video-carousel inline-template class="carousel">
+				<div>
+					<i class="fas fa-chevron-left carousel__chevron"
+						 @click="changeVideo('right')"></i>
+					<div class="carousel__content">
+						<div class="carousel__video"
+								 v-for="(video, i) in videos"
+								 :class="video.position"
+								 >
+							<div @click="changeVideo(0, video.position)" class="inactive" v-if="!video.active"></div>
+						<div class="carousel__overlay" v-if="!video.active && video.position == 'main'">
+							<div class="carousel__overlay-top">
+								<div class="carousel__overlay-picture">
+									<img :src="video.channelImage" alt="">
+								</div>
+								<div class="carousel__overlay-text">
+									<div class="carousel__overlay-name">
+										{{video.channelName}}
+									</div>
+									<div class="carousel__overlay-title">
+										{{video.channelTitle}}
+									</div>
+									<div class="carousel__overlay-views">
+										Assistido por {{video.channelViews}} espectadores
+									</div>
+								</div>
+								<div class="carousel__overlay-live">
+									<div class="record-button"></div>
+									<span class="u-inline-text">LIVE</span>
+								</div>
+							</div>
+							<i class="fas fa-play big-play" 
+								 v-on:click="video.active = !video.active">
+							</i>
+							<div class="carousel__overlay-bottom">
+								<i class="fas fa-play" 
+								 v-on:click="video.active = !video.active">
+							</i>
+								<i class="fas fa-volume-up carousel__overlay-icon carousel__overlay-icon--volume"></i>
+								<i class="fas fa-cog carousel__overlay-icon carousel__overlay-icon--settings"></i>
+								<i class="fas fa-arrows-alt-v carousel__overlay-icon carousel__overlay-icon--fullscreen"></i>
+							</div>
+							
+						</div>
+						<img 
+								 v-if="!video.active"
+								 :src="video.thumbnail" 
+								 alt=""
+								 class="carousel__video-picture"
+						>
+							<iframe v-if="video.active" id="ytplayer" type="text/html" width="100%" height="100%"
+  :src="video.embed"
+  frameborder="0"></iframe>
+							<div class="carousel__placeholder-background" v-if="video.active"></div>
+					</div>
+					</div>
+					<i class="fas fa-chevron-right carousel__chevron"
+						 @click="changeVideo('left')"></i>
+				</div>
+			</video-carousel>
+			
+			<div class="video-row">
+				<div class="video-row__title">
+					<span class="u-bold">
+						Canais ao vivo
+					</span>
+					que achamos que você vai gostar
+				</div>
+				<div v-for="n in 3" class="video-row__item">
+					<div class="recommended-video">
+						
+						<div class="recommended-video__thumbnail">
+							<div class="recommended-video__overlay">
+								<div class="recommended-video__overlay-live">
+									<div class="record-button"></div>
+									LIVE
+								</div>
+								<div class="recommended-video__overlay-viewers">
+									13,2 mil espectadores
+								</div>
+							</div>
+							<img src="https://i.ytimg.com/vi/dBVWgc-dJmE/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAuEdg7P7A7jTNVfaUPgwkgbXcfUw" alt="">
+						</div>
+						
+						<div class="recommended-video__info">
+							<div class="recommended-video__channel-pic">
+								<img src="https://yt3.ggpht.com/a-/AAuE7mCXgsNVSlp9-BLuKFoaAqKxpjJ0T1NB1yJzdQ=s288-mo-c-c0xffffffff-rj-k-no" alt="">
+							</div>
+							<div class="recommended-video__info-content">
+								<div class="recommended-video__title u-bold u-purple-hover">
+									alanzoka jogando CS: GO - #41
+								</div>
+								<div class="recommended-video__channel u-purple-hover">
+									alanzoka
+								</div>
+								<div class="recommended-video__game u-purple-hover">
+									Counter-Strike: Global Offensive
+								</div>
+								<div class="recommended-video__tags">
+									<div class="tag">FPS</div>
+									<div class="tag">Tiro</div>
+									<div class="tag">Brasil</div>
+								</div>
+							</div>
+							<div class="recommended-video__menu">
+								<i class="fas fa-ellipsis-v"></i>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="category-row">
+				<div class="category-row__title">
+					<a class="u-purple-link" href="#">Categorias </a> que você pode gostar
+				</div>
+				<div class="category-row__content">
+					<div class="boxart" v-for="n in 6">
+						<div class="boxart__image">
+							<img src="https://static-cdn.jtvnw.net/ttv-boxart/Super%20Smash%20Bros.%20Ultimate-188x250.jpg" alt="">
+						</div>
+						<div class="boxart__content">
+							<div class="boxart__text">
+								<div class="boxart__title">
+									Super Smash Bros....
+								</div>
+								<div class="boxart__viewers">
+									8.7k viewers
+								</div>
+								<div class="boxart__tags">
+									<div class="tag">Luta</div>
+									<div class="tag">Nintendo</div>
+								</div>
+							</div>
+							<div class="boxart__menu">
+								<i class="fas fa-ellipsis-v"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<div class="messages">
+		<i class="fas fa-comment-alt"></i>
+	</div>
+
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.18/chance.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js'></script><script  src="streamjs.js"></script>
+
+</body>
+</html>

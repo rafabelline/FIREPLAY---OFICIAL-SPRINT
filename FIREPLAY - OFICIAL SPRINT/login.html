@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="src/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="logo.css">
+    <title>Login</title>
+    <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/ydGC80F/Microsoft-Teams-image-15.png">
+</head>
+
+<body>
+    <a href="index.html"> <img src="https://i.ibb.co/ydGC80F/Microsoft-Teams-image-15.png" 
+        width="100" height="100" alt="logo do site " id="imgposlog"  /> </a>
+ <div class="forms">
+     <form>
+
+        <div class="tit">
+            <h3>Login</h3></div>
+       <div class="input"> 
+        <div class="teste">
+        <input type="text" placeholder="Login" id="login">
+        <input type="password" placeholder="Senha" id="senha"> </div>
+        <div class="rodape input">
+        <input type="submit" onclick="logar(); return false"> </div>
+        <div class="apple">
+            <a href="https://www.icloud.com/"> <img src="src/apple.png" width="114px">
+            <br>
+            <a href="https://www.google.com/intl/pt-BR/gmail/about/"> <img src="src/google.png" width="114px">
+        </div>
+        
+    </div>
+    </form>
+
+    <script>
+function logar(){
+
+var login = document.getElementById('login').value;
+var senha = document.getElementById('senha').value;
+
+if(login == "teste" && senha == "teste"){
+    alert('Sucesso');
+    location.href = "index.html";
+}else{
+    alert('Usuario ou senha incorretos');
+}
+
+} 
+
+    </script>
+
+</body>
+</html>
